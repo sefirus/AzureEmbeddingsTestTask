@@ -13,12 +13,12 @@ public class RagService : IRagService
     private readonly AzureOpenAISettings _settings;
     private readonly AzureOpenAIClient _embeddingsClient; // used to compute question embeddings
 
-    public RagService(IDocumentLoader documentLoader, IChatService chatService, AzureOpenAISettings settings, AzureOpenAIClient embeddingsClient)
+    public RagService(IDocumentLoader documentLoader, IChatService chatService, AzureOpenAISettings settings, IEmbeddingClientProvider embeddingsClient)
     {
         _documentLoader = documentLoader;
         _chatService = chatService;
         _settings = settings;
-        _embeddingsClient = embeddingsClient;
+        _embeddingsClient = embeddingsClient.Client;
     }
 
     public async Task RunAsync()

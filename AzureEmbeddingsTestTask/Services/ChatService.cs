@@ -9,10 +9,10 @@ public class ChatService : IChatService
     private readonly AzureOpenAISettings _settings;
     private readonly AzureOpenAIClient _completionsClient;
 
-    public ChatService(AzureOpenAISettings settings, AzureOpenAIClient completionsClient)
+    public ChatService(AzureOpenAISettings settings, ICompletionsClientProvider completionsClient)
     {
         _settings = settings;
-        _completionsClient = completionsClient;
+        _completionsClient = completionsClient.Client;
     }
 
     public async Task<string> GenerateAnswerAsync(string contextPrompt)

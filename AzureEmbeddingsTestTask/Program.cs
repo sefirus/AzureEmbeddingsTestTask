@@ -32,12 +32,8 @@ var host = Host.CreateDefaultBuilder(args)
         }
 
         //Singleton is not the best solution, better have some wrapper/pool. But will work for console app 
-        services.AddSingleton(new AzureOpenAIClient(
-            new Uri(settings.EmbeddingsEndpoint),
-            new ApiKeyCredential(settings.EmbeddingsApiKey))); 
-        services.AddSingleton(new AzureOpenAIClient(
-            new Uri(settings.CompletionsEndpoint),
-            new ApiKeyCredential(settings.CompletionsApiKey)));
+        services.AddSingleton<IEmbeddingClientProvider, EmbeddingClientProvider>();
+        services.AddSingleton<ICompletionsClientProvider, CompletionsClientProvider>();
 
         services.AddSingleton<IDocumentLoader, DocumentLoader>();
         services.AddSingleton<IChatService, ChatService>();

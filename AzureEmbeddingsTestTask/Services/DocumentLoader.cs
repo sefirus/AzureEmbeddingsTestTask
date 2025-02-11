@@ -10,10 +10,10 @@ public class DocumentLoader : IDocumentLoader
     private readonly AzureOpenAISettings _settings;
     private readonly AzureOpenAIClient _embeddingsClient;
 
-    public DocumentLoader(AzureOpenAISettings settings, AzureOpenAIClient embeddingsClient)
+    public DocumentLoader(AzureOpenAISettings settings, IEmbeddingClientProvider embeddingsClient)
     {
         _settings = settings;
-        _embeddingsClient = embeddingsClient;
+        _embeddingsClient = embeddingsClient.Client;
     }
 
     public async Task<List<Document>> LoadDocumentsAsync()
